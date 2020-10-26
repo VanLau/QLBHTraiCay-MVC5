@@ -1,0 +1,47 @@
+﻿
+
+@{
+    WebGrid grid = null;
+    string errMsg = null;
+    try
+    {
+        grid = new WebGrid(source: Model, rowsPerPage: 5, ajaxUpdateContainerId: "dsDetailsUpdate");
+    }
+    catch (Exception ex)
+    {
+        errMsg = $"Lỗi truy cập dữ liệu. {ex.Message}";
+    }
+}
+
+<div id="dsDetailsUpdate">
+    @if (errMsg != null)
+    {
+        <h4 class="text-danger">@errMsg</h4>
+    }
+    else
+    {
+        @grid.GetHtml(
+            tableStyle: "table table-bordered table-hover",
+            headerStyle: "table-warning",
+            footerStyle: "table-info text-center",
+            mode: WebGridPagerModes.All, firstText: "Trang Đầu", lastText: "Trang cuối", previousText: "<<", nextText: ">>",
+            numericLinksCount: 10,
+            columns: grid.Columns(               
+                grid.Column("HoaDon.NgayDatHang", header: "Ngày đặt hàng", format: item => item.HoaDon.NgayDatHang.ToString("dd/MM/yyyy")),
+                grid.Column("HoaDon.HoTenKhach", header: "Tên Khách hàng"),                      
+                grid.Column("HangHoa.TenHang", header: "Tên hàng hóa"),
+                grid.Column("SoLuong", header: "Số lượng"),
+                grid.Column("DonGia", header: "Đơn giá"),
+                grid.Column("ThanhTien", header: "Thành tiền")
+             
+                )
+       )
+
+    }
+</div>
+
+
+
+
+
+

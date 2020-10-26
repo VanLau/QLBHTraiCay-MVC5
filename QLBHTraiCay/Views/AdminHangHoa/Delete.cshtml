@@ -1,0 +1,105 @@
+﻿@model QLBHTraiCay.Models.HangHoa
+
+
+@{
+    ViewBag.Title = "Xóa hàng hóa";
+}
+
+
+<h2 style="color:#4e73df">Xóa hàng hóa</h2>
+&emsp;
+<h4 style="color:#ff0000">Bạn có chắt chắn là muốn xóa hàng hóa này?</h4>
+&emsp;
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.MaHang, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.MaHang, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.TenHang, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.TenHang, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.DVT, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.DVT, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.QuyCach, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.QuyCach, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.GiaBan, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.GiaThiTruong, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.GiaThiTruong, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.LoaiID, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.Loai.TenLoai, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.XuatXu, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.XuatXu, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.TinhTrang, htmlAttributes: new { @class = "control-label col-md-1  font-weight-bold" })
+
+            @*@Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TinhTrang, "", new { @class = "text-danger" })*@
+            @if (Model.TinhTrang == 1)
+            {
+                <div class="col-md-9" style="border-style:groove; border-radius: 5px; "> Còn hàng</div>
+            }
+            else
+            {
+                <div class="col-md-9" style="border-style:groove; border-radius: 5px; "> Hết hàng</div>
+            }
+
+        </div>
+
+    </div>
+
+    <div class="form-actions mt-2">
+        <input type="submit" value="Xóa" class="btn btn-primary" />
+        &emsp;
+        <div class="btn btn-warning">
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    </div>
+}

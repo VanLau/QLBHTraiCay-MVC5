@@ -1,0 +1,82 @@
+﻿
+
+<div id="SearchContainerUpdate">
+    <div class="row">
+        @*@foreach (HangHoaViewModels.HangHoaOutPut item in ViewBag.OnePageOfData)*@
+        @foreach (HangHoa item in ViewBag.OnePageOfData)
+        {
+            <div class="col-sm-12 col-md-6 col-lg-3 d-flex text-center">
+                <div class="product d-flex flex-column">
+                    <a href="@Url.Action("ChiTietSanPham", "HangHoa", new { id = item.ID, name = item.BiDanh })" class="img-prod">
+                        @*<a href="#" class="img-prod">*@
+                        <img class="img-fluid" src="/Photos/@item.Hinhs[0]" alt="Colorlib Template" style="height:200px; width:200px">
+                        <div class="overlay"></div>
+                    </a>
+                    <div class="text py-3 pb-4 px-3">
+
+                        <h3><a href="@Url.Action("ChiTietSanPham", "HangHoa", new { id = item.ID, name = item.BiDanh })">@item.TenHang</a></h3>
+
+                        <div class="pricing">
+                            <p class="price">
+                                <span style="color:red">Giá SP: @item.GiaBan.ToString("#,##0 VND")</span>
+
+                            </p>
+                        </div>
+                        @{
+                            if (item.Gia1 != 0)
+                            {
+
+                                <div class="pricing">
+                                    <p class="price">
+                                        <span>Giá TT:</span>
+                                        <span style="font-size:14px; color:#aaaaaa; text-decoration: line-through;">@item.Gia1.ToString("#,##0 VND")</span>
+                                    </p>
+                                </div>
+                            }
+                        }
+
+                        @{ string frmID = $"frmAddToCart{item.ID}";
+                            string frmSubmit = $"javascript:{frmID}.submit()"; }
+                        @using (Html.BeginForm("AddToCart", "GioHangAjax", new { HangHoaID = item.ID }, FormMethod.Post,
+                                        htmlAttributes: new { id = frmID })) { }
+
+                        <p class="bottom-area d-flex px-3">
+                            <a href="@frmSubmit" class="add-to-cart text-center py-2 mr-1"><span>Thêm Vào Giỏ Hàng <i class="ion-ios-add ml-1"></i></span></a>
+                            <a href="@frmSubmit" class="buy-now text-center py-2">Đặt Hàng<span><i class="ion-ios-cart ml-1"></i></span></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <div class="col-12 mt-5">
+
+        <div class="block-27">
+            @if (ViewBag.page > ViewBag.pagesize)
+            {
+                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfData,
+                                                p => Url.Action("Search", new { page = p, search = ViewBag.search }),
+                                                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+                                                    new PagedListRenderOptions
+                                                    {
+                                                        LiElementClasses = new string[] { "page-item" },
+                                                        PageClasses = new string[] { "page-link" }
+                                                    },
+                                                    ajaxOptions: new AjaxOptions
+                                                    {
+                                                        UpdateTargetId = "SearchContainerUpdate",
+                                                        InsertionMode = InsertionMode.Replace,
+                                                        HttpMethod = "POST"
+                                                    }
+                                                    )
+                                                )
+            }
+        </div>
+
+
+    </div>
+</div>
+
+

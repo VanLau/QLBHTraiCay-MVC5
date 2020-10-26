@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_QLBHLayout.cshtml";
+}
+
+@section BannerHero{
+    @Html.Partial("_HeroBannerPartial")
+}
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-8 col-lg-10 heading-section text-center ftco-animate">
+                <h2 style="background-color:#1DAF4D; font-weight:800; color:white; font-size:35px" class="mb-4">@ViewBag.TieuDe</h2>
+                <div id="HangHoaContainerUpdate">
+
+                    @Html.Partial("_HangHoaTNAjaxPartial")
+
+                </div>
+
+                <div style="margin-top:90px">
+                    @Html.Action("_HangHoaNKPartial", "HangHoa")
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-lg-2">
+                @Html.Action("_HangHoaBCPartial", "HangHoa")
+
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+
+
+
+
+
+
+

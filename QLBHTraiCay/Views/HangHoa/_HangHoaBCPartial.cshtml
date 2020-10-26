@@ -1,0 +1,41 @@
+﻿
+
+<div class="row justify-content-center mb-3 pb-3">
+    <div class="col-md-12 heading-section text-center ftco-animate">
+        <h2 style="background-color:#1DAF4D; font-weight:700; color:white; font-size:14px; padding:14px 0px 14px 7px;" class="mb-4">
+            SẢN PHẨM BÁN CHẠY
+        </h2>
+
+        <div class="row">
+            @foreach (HangHoa item in ViewBag.HangHoas)
+            {
+                <div class="col-sm-12 ftco-animate d-flex">
+                    <div class="product d-flex flex-column">
+                        <a href="@Url.Action("ChiTietSanPham","HangHoa",new {id=item.ID , name=item.BiDanh})" class="img-prod">
+
+                            <img class="img-fluid" src="~/Photos/@item.Hinhs[0]" alt="Colorlib Template" style="height:100px; width:100%">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3" style="height:90px">
+
+                            <h3><a href="@Url.Action("ChiTietSanPham","HangHoa",new {id=item.ID, name=item.BiDanh })">@item.TenHang</a></h3>
+
+                            <div class="pricing">
+                                <p class="price" style="color:red"><span>Giá: @item.GiaBan.ToString("#,##0 VND")</span></p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

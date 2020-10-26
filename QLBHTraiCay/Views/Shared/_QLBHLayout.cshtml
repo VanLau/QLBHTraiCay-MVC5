@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title - LAUFRUITS Shop</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/animate.css">
+
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/aos.css">
+
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/ionicons.min.css">
+
+    @*<link rel="stylesheet" href="~/LAUFRUITSShop/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="~/LAUFRUITSShop/css/jquery.timepicker.css">*@
+
+    @RenderSection("DateTimepickerCss", false)
+
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/flaticon.css">
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/icomoon.css">
+    <link rel="stylesheet" href="~/LAUFRUITSShop/css/style.css">
+
+    <script src="~/LAUFRUITSShop/js/jquery.min.js"></script>
+    
+    @RenderSection("styles", false)
+</head>
+<body class="goto-here">
+    @Html.Partial("_HeaderPartial")
+
+    @RenderSection("BannerHero", false)
+
+    @RenderBody()
+
+    
+
+    @Html.Partial("_FooterPartial")
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+    <script src="~/LAUFRUITSShop/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/popper.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/bootstrap.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/jquery.easing.1.3.js"></script>
+    <script src="~/LAUFRUITSShop/js/jquery.waypoints.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/jquery.stellar.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/owl.carousel.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/aos.js"></script>
+    <script src="~/LAUFRUITSShop/js/jquery.animateNumber.min.js"></script>
+
+    @RenderSection("DateTimepickerJs", false)
+    @*<script src="~/LAUFRUITSShop/js/bootstrap-datepicker.js"></script>*@
+    <script src="~/LAUFRUITSShop/js/scrollax.min.js"></script>
+    <script src="~/LAUFRUITSShop/js/main.js"></script>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

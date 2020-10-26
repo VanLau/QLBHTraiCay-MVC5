@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Hàng hóa";
+    Layout = "~/Views/Shared/_QLBHLayout.cshtml";
+}
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-lg-10 order-md-last" id="HangHoaContainerUpdate">
+                
+                @Html.Partial("_ShopListAjaxPartial")
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <div class="sidebar" >
+                    @Html.Action("_ChungLoaiAjaxPartial", "ChungLoai")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section BannerHero{
+    @Html.Partial("_HeroBannerPartial")
+}
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+

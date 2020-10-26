@@ -1,0 +1,122 @@
+﻿<div class="container">
+    <div class="row justify-content-center mb-3 pb-3">
+        <div class="col-md-12 heading-section text-center">
+            <h2 style="background-color:#1DAF4D; font-weight:800; color:white; font-size:35px" class="mb-4">
+            @ViewBag.TieuDe
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div class="row" >
+
+    @foreach (HangHoa item in ViewBag.OnePageOfData)
+    {
+        string lienKet = Url.Action("ChiTietSanPham", "HangHoa", new { id = item.ID, name = item.BiDanh });
+
+        @*<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">*@
+        <div class="col-sm-12 col-md-12 col-lg-4 d-flex text-center">
+            <div class="product d-flex flex-column">
+                <a href="@lienKet" class="img-prod">
+
+                    <img class="img-fluid" src="~/Photos/@item.Hinhs[0]"
+                         alt="Colorlib Template" style="height:200px;width:200px">
+                    <div class="overlay"></div>
+                </a>
+                <div class="text py-3 pb-4 px-3">
+
+                    <h3><a href="@lienKet">@item.TenHang</a></h3>
+
+                    <div class="pricing">
+                        <p class="price"><span style="color:red">Giá SP: @item.GiaBan.ToString("#,##0VND")</span></p>
+                    </div>
+                   
+                    @if (item.Gia1 != 0)
+                    {
+
+                        <div class="pricing">
+                            <p class="price">
+                                <span>Giá TT:</span>
+                                <span style="font-size:14px; color:#aaaaaa; text-decoration: line-through;">@item.Gia1.ToString("#,##0VND")</span>
+                            </p>
+                        </div>
+                    }
+                    
+
+                    @{
+                        string frmID = $"frmAddToCart{item.ID}";
+                        string frmSubmit = $"javascript:{frmID}.submit()";
+                    }
+                    @using (Html.BeginForm("AddToCart", "GiohangAjax", new { HangHoaID = item.ID }, FormMethod.Post,
+                        htmlAttributes: new { id = frmID })) { }
+                    <p class="bottom-area d-flex px-3">
+                        <a href="@frmSubmit" class="add-to-cart text-center py-2 mr-1">
+                            <span>
+                                Thêm Vào Giỏ hàng <i class="ion-ios-add ml-1"></i>
+                            </span>
+                        </a>
+                        <a href="@frmSubmit" class="buy-now text-center py-2">
+                            Đặt hàng<span>
+                                <i class="ion-ios-cart ml-1"></i>
+                            </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="row mt-5">
+    <div class="col text-center">
+        <div class="block-27">
+            @*phân trang*@
+            @if (ViewBag.LoaiID == null)
+            {
+                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfData,
+                         p => Url.Action("ShopListAjax", new { page = p }),
+                         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+                             new PagedListRenderOptions
+                             {
+                                 LiElementClasses = new string[] { "page-item" },
+                                 PageClasses = new string[] { "page-link" }
+                             },
+                             ajaxOptions: new AjaxOptions
+                             {
+                                 UpdateTargetId = "HangHoaContainerUpdate",
+                                 InsertionMode = InsertionMode.Replace,
+                                 HttpMethod = "GET"
+                             }
+                             )
+                         )
+            }
+            else
+            {
+                if (ViewBag.page > ViewBag.pagesize)
+                {
+                    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfData,
+                         p => Url.Action("TraCuuTheoLoaiAjax", new { id = ViewBag.LoaiID, page = p }),
+                         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+                             new PagedListRenderOptions
+                             {
+                                 LiElementClasses = new string[] { "page-item" },
+                                 PageClasses = new string[] { "page-link" }
+                             },
+                             ajaxOptions: new AjaxOptions
+                             {
+                                 UpdateTargetId = "HangHoaContainerUpdate",
+                                 InsertionMode = InsertionMode.Replace,
+                                 HttpMethod = "GET"
+                             }
+                             )
+                         )
+                }
+
+            }
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<QLBHTraiCay.Models.ChungLoai>
+
+@{
+    ViewBag.Title = "Danh sách chủng loại";
+}
+
+
+
+<div class="container">
+    <h2 style="color:#4e73df">Danh sách chủng loại</h2>
+    &emsp;
+    <hr />
+    <table class="table table-bordered table-hover">
+        <thead class="table-warning" style="color:#4e73df">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaCL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenCL)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.ActionLink((string)item.MaCL, "Details", new { id = item.ID })
+                    </td>
+                    <td>
+                        @Html.ActionLink((string)item.TenCL, "Details", new { id = item.ID })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@section Search{
+    @Html.Partial("_SearchChungLoaiPartial")
+}
+
+

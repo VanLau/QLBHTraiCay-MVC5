@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết hóa đơn";
+}
+
+
+<div class="container">
+    <h2 style="color:#4e73df">Chi tiết hóa đơn</h2>
+    &emsp;
+    <hr />
+    @Html.Partial("_DetailsPartial")
+
+    <div class="form-group ">
+        <div class="btn btn-warning">
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    </div>
+</div>

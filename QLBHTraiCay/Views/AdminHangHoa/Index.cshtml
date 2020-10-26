@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách hàng hóa";
+}
+
+
+
+<div class="container">
+    <h2 style="color:#4e73df">Danh sách hàng hóa</h2>
+    &emsp;
+    <hr />
+    @*<p>@Html.ActionLink("Thêm", "Create")</p>*@
+
+    @Html.Partial("_IndexPartial")
+</div>
+
+@section Search{
+    @Html.Partial("_SearchHangHoaPartial")
+ }

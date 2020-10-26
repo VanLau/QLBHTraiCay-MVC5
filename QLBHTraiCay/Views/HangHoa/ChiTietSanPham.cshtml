@@ -1,0 +1,184 @@
+﻿@model HangHoa
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_QLBHLayout.cshtml";
+}
+
+
+@section BannerHero{
+    @Html.Partial("_HeroBannerPartial")
+}
+
+<section class="ftco-section">
+
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 style="background-color:#1DAF4D; font-weight:800; color:white; font-size:35px" class="mb-4">CHI TIẾT SẢN PHẨM</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate">
+                <a href="~/Photos/@Model.Hinhs[0]" class="image-popup prod-img-bg">
+                    <img src="~/Photos/@Model.Hinhs[0]" class="img-fluid" alt="Colorlib Template" style="height:400px; width:100%">
+                </a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                <h3 style="color:#1DAF4D"><b>@Model.TenHang.ToUpper()</b></h3>
+                <p><b>Xuất xứ: </b> @Model.XuatXu</p>
+                <p><b>Quy cách: </b> @Model.QuyCach</p>
+                <p><b>Đơn vị tính: </b> @Model.DVT</p>
+                <p><b>Giá bán: </b> <b style="font-size:24px; color:#ff0000">@Model.GiaBan.ToString("#,##0 VND")</b></p>
+
+                <p class="price">
+                    <b>Giá thị trường: </b>
+                    @if (Model.Gia1 != 0)
+                    {
+                        <b style="font-size:18px; color:#aaaaaa; text-decoration: line-through;">@Model.Gia1.ToString("#,##0 VND")</b>
+                    }
+                </p>
+
+
+                <p>
+                    <b>Tình  trạng:</b>
+                    @if (Model.TinhTrang == 1)
+                    {
+                        <a>Còn hàng</a>
+                     }
+                    else
+                    {
+                        <a> Hết hàng</a>
+                    }
+                </p >
+
+                <div class="row mt-4">
+
+                    <div class="w-100"></div>
+                    <div class="input-group col-md-6 d-flex mb-3">
+
+                        @using (Html.BeginForm("AddToCart", "GioHangAjax", new { HangHoaID = Model.ID }, FormMethod.Post,
+                            htmlAttributes: new { id = "frmAddToCart" })) { }
+
+                        <span class="input-group-btn mr-2">
+                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                <i class="ion-ios-remove"></i>
+                            </button>
+                        </span>
+                        <input type="text" id="quantity" name="SoLuong" form="frmAddToCart" class="quantity form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn ml-2">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                <i class="ion-ios-add"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="w-100"></div>
+                    
+                </div>
+            
+                <p>
+                    <a href="javascript:frmAddToCart.submit()" class="btn btn-black py-3 px-5 mr-2">Thêm Vào Giỏ Hàng</a>
+                    <a href="javascript:frmAddToCart.submit()" class="btn btn-primary py-3 px-5">Đặt hàng</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12 nav-link-wrap">
+                <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Mô tả</a>
+
+                    <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Đánh giá</a>
+
+                </div>
+            </div>
+            <div class="col-md-12 tab-wrap">
+
+                <div class="tab-content bg-light" id="v-pills-tabContent">
+
+                    <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
+                        <div class="p-4">
+                            <h3 class="mb-4">@Model.TenHang.ToUpper()</h3>
+                            <p>@Html.Raw(Model.MoTa)</p>
+                        </div>
+                    </div>
+
+                    
+                    <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
+                        <div class="row p-4">
+                            <div class="col-md-7">
+                                <h3 class="mb-4">        </h3>
+                                <div class="review">
+                                    <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                                    <div class="desc">
+                                        <h4>
+                                            <span class="text-left">         </span>
+                                            <span class="text-right">           </span>
+                                        </h4>  
+                                        <p>                      </p>
+                                    </div>
+                                </div>
+                                <div class="review">
+                                    <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                                    <div class="desc">
+                                        <h4>
+                                            <span class="text-left">         </span>
+                                            <span class="text-right">           </span>
+                                        </h4>                                       
+                                        <p>                                           </p>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
+
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
+
+                // If is not undefined
+
+                $('#quantity').val(quantity + 1);
+
+
+                // Increment
+
+            });
+
+            $('.quantity-left-minus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
+
+                // If is not undefined
+
+                // Increment
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+
+        });
+    </script>
+}

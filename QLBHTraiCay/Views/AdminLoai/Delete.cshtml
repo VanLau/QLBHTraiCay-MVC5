@@ -1,0 +1,51 @@
+﻿@model QLBHTraiCay.Models.Loai
+
+@{
+    ViewBag.Title = "Xóa loại hàng";
+}
+
+<h2 style="color:#4e73df">Xóa loại hàng</h2>
+&emsp;
+<h4 style="color:#ff0000">Bạn có chắt chắn là muốn xóa loại hàng này?</h4>
+&emsp;
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.MaLoai, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.MaLoai, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.TenLoai, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.TenLoai, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.ChungLoaiID, htmlAttributes: new { @class = "control-label col-md-1 font-weight-bold" })
+            <div class="col-md-9" style="border-style:groove; border-radius: 5px; ">
+                @Html.DisplayFor(model => model.ChungLoai.TenCL, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions mt-2">
+        <input type="submit" value="Xóa" class="btn btn-primary" />
+        &emsp;
+        <div class="btn btn-warning">
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    </div>
+}

@@ -1,0 +1,59 @@
+﻿@*<div class="container" style="border:1px solid #ccc; padding: 0 1px;">
+
+    <h2 class="heading" style="font-weight:bold; background-color:#1DAF4D; color:white; height:50px; font-size:20px; padding: 10px 0 10px 10px;">
+        DANH MỤC
+    </h2>*@
+    <div class="fancy-collapse-panel" >
+        <h2 class="heading" style="font-weight:bold; background-color:#1DAF4D; color:white; height:52px; font-size:20px; padding: 10px 0 10px 10px;">
+            DANH MỤC
+        </h2>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
+            @foreach (ChungLoai chungLoaiItem in ViewBag.ChungLoais)
+            {
+                int CLID = chungLoaiItem.ID;
+                string headingID = $"heading{CLID}";
+                string collapseID = $"collapse{CLID}";
+
+                <div class="panel panel-default" style="border:1px solid #ccc; padding: 0 3px 0 3px;">
+
+                    <div class="panel-heading" role="tab" id="@headingID">
+                        <h4 class="panel-title">                        
+                            <!--Lưu ý: có gài css class collapsed-->
+                            <a data-toggle="collapse" data-parent="#accordion" href="#@collapseID"
+                               aria-expanded="false" aria-controls="@collapseID" class="carousel-control-prev-icon" style="font-weight:bold; color:#000000">
+                                @chungLoaiItem.TenCL
+                            </a>
+                        </h4>
+                    </div>
+                    <!--Lưu ý: ko có gài css class show-->
+                    <div id="@collapseID" class="" role="tabpanel" aria-labelledby="@headingID">
+                        @*<div id="@collapseID" class="panel-collapse collapse" role="tabpanel" aria-labelledby="@headingID">*@
+                        <div class="panel-body">
+                            <ul>
+                                @foreach (Loai loaiItem in chungLoaiItem.Loais)
+                                {
+                                    <li>
+                                    <!--cai gói hổ trợ ajax-->
+                                    @Ajax.ActionLink(loaiItem.TenLoai, "TraCuuTheoLoaiAjax", "HangHoa", new { id = loaiItem.ID },
+                                                                                             new AjaxOptions
+                                                                                             {
+                                                                                                 UpdateTargetId = "HangHoaContainerUpdate",
+                                                                                                 InsertionMode = InsertionMode.Replace,
+                                                                                                 HttpMethod = "GET"
+                                                                                             }
+                                                                                           )
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                               
+            }
+
+        </div>
+    </div>
+@*</div>*@
+
+

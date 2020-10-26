@@ -1,0 +1,48 @@
+﻿
+@{
+    WebGrid grid = null;
+    string errMsg = null;
+    try
+    {
+        grid = new WebGrid(source: Model, rowsPerPage: 5, ajaxUpdateContainerId: "dsLoaiUpdate");
+    }
+    catch (Exception ex)
+    {
+        errMsg = $"Lỗi truy cập dữ liệu. {ex.Message}";
+    }
+}
+
+<div id="dsLoaiUpdate">
+    @if (errMsg != null)
+    {
+        <h4 class="text-danger">@errMsg</h4>
+    }
+    else
+    {
+        @grid.GetHtml(
+            tableStyle: "table table-bordered table-hover",
+            headerStyle: "table-warning",
+            footerStyle: "table-info text-center",
+            mode: WebGridPagerModes.All, firstText: "Trang Đầu", lastText: "Trang cuối", previousText: "<<", nextText: ">>",
+            numericLinksCount: 10,
+            columns: grid.Columns(
+                grid.Column("ID", header: "ID"),
+                grid.Column("MaLoai", header: "Mã loại"),
+                grid.Column("TenLoai", header: "Tên loại",
+                                   format: item => Html.ActionLink((string)item.TenLoai, "Details", new { id = item.id })),
+
+                
+                grid.Column("ChungLoai.TenCL", header: "Chủng loại"),
+
+                grid.Column(format: item => Html.ActionLink("Sửa", "Edit", new { id = item.id })),
+                grid.Column(format: item => Html.ActionLink("Xóa", "Delete", new { id = item.id }))
+                )
+       )
+
+    }
+</div>
+
+
+
+
+

@@ -1,0 +1,67 @@
+﻿
+@model QLBHTraiCay.Models.HangHoa
+@{
+    ViewBag.Title = "Hàng hóa: Upload";
+
+}
+
+<div class="form-group row">
+    <h2 style="color:#4e73df">Upload hình cho hàng hóa: </h2>
+    &emsp;
+    <h2 class="text-info">@Model.TenHang</h2>
+</div>
+
+&emsp;
+
+<div class="text-danger"> @ViewBag.ThongBao</div>
+
+@using (Html.BeginForm("Upload", "AdminHangHoa", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputfile" name="taptins" multiple>
+        <label class="custom-file-label" for="inputfile">chọn tập tin</label>
+    </div>
+    <div class="form-group mt-2">
+        <button type="submit" class="btn btn-primary">Lưu ảnh</button>
+        &emsp;
+        <div class="btn btn-warning">
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    </div>
+
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var names = [];
+            var length = $(this).get(0).files.length;
+            for (var i = 0; i < $(this).get(0).files.length; ++i) {
+                names.push($(this).get(0).files[i].name);
+            }
+            if (length > 1) {
+                var fileName = names.join(', ');
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            }
+            else {
+                $(this).siblings(".custom-file-label").addClass("selected").html(names);
+            }
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

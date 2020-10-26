@@ -1,0 +1,125 @@
+﻿
+<div class="container">
+    @{
+        var gioHang = ViewBag.GioHang as GioHangModel;
+    }
+
+    @if (gioHang != null && gioHang.TongSanPham > 0)
+    {
+        int stt = 0;
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <td>Tên sản phẩm</td>
+                                <td>Đơn giá</td>
+                                <td>Số lượng</td>
+                                <td>Thành tiền</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in gioHang.DanhSach)
+                            {
+                                ++stt;
+                                <tr class="text-center">
+                                    <td class="product-remove">
+                                        @{var frmXoa = $"frmXoa{stt}"; }
+                                        @using (Ajax.BeginForm("Delete", "GioHangAjax", new { HangHoaID = item.HangHoa.ID },
+                                                new AjaxOptions
+                                                {
+                                                    UpdateTargetId = "cartContainer",
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    HttpMethod = "POST"
+                                                }
+                                                , htmlAttributes: new { @id = frmXoa }))
+                                        {
+                                            <button type="submit" class="btn-remove" title="Xóa"><span class="ion-ios-close"></span></button>
+                                        }
+                                    </td>
+                                    <td class="image-prod">
+                                        @{ string imgUrl = Url.Content($"~/photos/{item.HangHoa.Hinhs[0]}");}
+                                        <div class="img" style="background-image:url('@imgUrl');"></div>
+                                    </td>
+                                    <td class="product-name">
+                                        <h3>@item.HangHoa.TenHang</h3>
+                                    </td>
+                                    <td class="price">@item.HangHoa.GiaBan.ToString("#,##0 VND")</td>
+                                    <td class="quantity">
+                                        <div class="input-group mb-3">
+                                            @{var frmHC = $"frmHC{stt}";}
+                                            @using (Ajax.BeginForm("Edit", "GioHangAjax", new { HangHoaID = item.HangHoa.ID },
+                                                                                new AjaxOptions
+                                                                                {
+                                                                                    UpdateTargetId = "cartContainer",
+                                                                                    InsertionMode = InsertionMode.Replace,
+                                                                                    HttpMethod = "POST"
+                                                                                }
+                                                                            , htmlAttributes: new { @id = frmHC }))
+                                            {
+                                                var SLID = "SL" + stt;
+                                                <input type="number" name="SoLuong" value="@item.SoLuong" id="@SLID" min="1" max="100" class="quantity form-control input-number" style="display:inline;width:100px" />
+                                                <button type="submit" class="btn-save" title="Cập nhật"><i class="ion-ios-save"></i></button>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td class="total">@((item.HangHoa.GiaBan * item.SoLuong).ToString("#,##0 VND"))</td>
+                                </tr><!-- END TR-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col col-lg-5 col-md-6 mt-5 cart-wrap">
+                <div class="cart-total mb-3">
+                    <h3>Đơn hàng</h3>
+                    <p class="d-flex">
+                        <span>Tổng số mặt hàng</span>
+                        <span>@gioHang.TongSanPham</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Tổng số lượng</span>
+                        <span>@gioHang.TongSoLuong</span>
+                    </p>
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Tổng trị giá</span>
+                        <span>@gioHang.TongTriGia.ToString("#,##0 VND")</span>
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <p class="text-center">
+                            <a href="@Url.Action("HangHoaIndex", "HangHoa")" class="btn btn-primary py-3 px-4">
+                                Tiếp tục mua hàng
+                            </a>
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="text-center">
+                            <a href="@Url.Action("DatHang", "GioHangAjax")" class="btn btn-primary py-3 px-4">
+                                Thanh toán
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                
+                <h4 class="text-danger">@TempData["LoiDatHang"]</h4>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h4>Giỏ hàng của bạn hiện tại không có thông tin.</h4>
+    }
+</div>
+
+
+
+

@@ -1,0 +1,94 @@
+﻿
+<div class="py-1 bg-light">
+    <div class="container">
+        <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+            <div class="col-lg-12 d-block">
+                <div class="row d-flex">
+
+                    <div class="col-md-3 col-sm-4 col-xs-3 d-flex topper  text-lg-right">
+                        <span class="text" style="color:red; font-size: 25px; font-weight:1000; text-align:center">
+                            LAUFRUITS <br /> Shop
+                        </span>
+                    </div>
+
+                    <div class="col-md-5 col-sm-4 col-xs-6 ml-auto" style="margin-top:10px">
+                        <h4 style="color:#1DAF4D; font-size:18px; font-weight:700;">
+                            HỆ THỐNG THỰC PHẨM SẠCH LAUFRUITS
+                        </h4>
+                        <form id="search_form" method="post" action="@Url.Action("Search","HangHoa")" >
+                            <input type="text" class="form-control" id="txtsearch" name="search" placeholder="Nhập tên sản phẩm..." style="border: 1px solid #ccc; border-right: none; border-radius: 5px 5px 5px 5px; max-width: 350px; font-size: 0.9em; color: #333; margin: 0; padding: 19px; float: left; max-height:5px">
+                            <button type="submit" class="btn btn-danger submit" style="color: #fff; border: none; min-width: 20px; float: left; border-radius: 0 5px 5px 0; padding: 10px; margin: 0 5px 0 0;">
+                                <i>TÌM</i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6" style="margin-top:10px">
+                        <h4 style="color:red; font-size:16px; font-weight:700;text-align:center">
+                            Liên hệ:<br /> <a style="font-size:18px;">0933492334</a>
+                        </h4>
+                    </div>
+
+                    <div class="col-md-2 d-flex topper  text-lg-right ml-auto">
+                        <span class="text" style="padding-top:20px; color:black">
+                            Số người online: @{ Html.RenderAction("_ThongKeSoNguoiOnline", "Home");}
+                        </span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light ftco-navbar-light-2 " id="ftco-navbar">
+    <div class="container bg-success col-12" >
+        <div class="container">
+            @*<a class="navbar-brand" style="color:red; font-size: 40px; font-weight:800" href="@Url.Action("Index","Home")">LAUFRUITS Shop</a>*@
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style="font-size:18px; font-weight:800; color:white; padding:8px 23px 8px 23px" href="@Url.Action("Index","Home")" class="nav-link">
+                            TRANG CHỦ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size:18px; font-weight:800; color:white; padding:8px 23px 8px 23px" href="@Url.Action("ShopListAjax","HangHoa")" class="nav-link">
+                            SẢN PHẨM
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size:18px; font-weight:800; color:white; padding:8px 23px 8px 23px" href="@Url.Action("About","Home")" class="nav-link">
+                            GIỚI THIỆU
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a style="font-size:18px; font-weight:800; color:white; padding:8px 23px 8px 23px" href="@Url.Action("Contact","Home")" class="nav-link">
+                            LIÊN HỆ
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item cta cta-colored">
+                        @{ //Tham chiếu đến giỏ hàng trong Session
+                            var gioHang = Session["GioHang"] as GioHangModel;
+                            var tongsp = gioHang?.TongSanPham; }
+                        <a href="@Url.Action("Index","GioHangAjax")" class="nav-link" style="padding: 8px 23px 8px 23px">
+                            <span style="font-size:24px; font-weight:800; color:white;" class="icon-shopping_cart"></span>
+
+                            <b style="font-size:18px; color:white">@tongsp</b>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- END nav -->
