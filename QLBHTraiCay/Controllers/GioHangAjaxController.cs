@@ -66,7 +66,7 @@ namespace QLBHTraiCay.Controllers
         }
         #endregion
 
-        #region Xửa giỏ hàng
+        #region Sửa giỏ hàng
         // POST: GioHangAjax/Edit/5
         [HttpPost]
         [Route("gio-hang-sua")]
